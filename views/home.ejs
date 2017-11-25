@@ -40,19 +40,30 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script type="text/javascript">
 
+      // overrides default on-submit behaviour
+      // to send message asynchronously (i.e. not reload page)
       $('#message-form').submit(function(){
 
-          // Maybe show a loading indicator...
+          // TODO: add a sending indicator
 
-          $.post($(this).attr('action'), $(this).serialize(), function(res){
+          // gets url to submit to
+          var action = $(this).attr('action');
+
+          // gets form data (same as in normal form submission)
+          var formData = $(this).serialize();
+
+          // performs an async POST request
+          $.post(action, formData, function(res){
               // Do something with the response `res`
               // console.log(res);
-              // Don't forget to hide the loading indicator!
-          }); 
+              // Don't forget to hide the sending indicator!
+          });
 
+          // clears the content field after attempting to send message
           $(this).find('[name=content]').val('');
 
-          return false; // prevent default action
+          // prevent default action (i.e. form submission, page reloading)
+          return false;
 
       });
 

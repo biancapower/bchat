@@ -8,12 +8,12 @@ const bodyParser = require('body-parser');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
+// app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 }));
 
-//configure sse.sseMiddleware as function to get a stab at incoming requests, in this case by adding a Connection property to the request
+// Server Send Events - allows server to push events to client asynchronously
 app.use(sse.sseMiddleware)
 
 
