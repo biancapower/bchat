@@ -1,0 +1,15 @@
+{
+  "name": "bchat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:biancapower/bchat.git",
+  "author": "Bianca Power <drbiancampower@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2"
+  }
+}
