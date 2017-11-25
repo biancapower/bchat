@@ -13,16 +13,55 @@
     <div class="container">
       <h1>Welcome to BChat</h1>
 
-      <% messages.forEach((m) => { %>
-        <p><%= m %></p>
-      <% }); %>
+      <div class="" id="messages">
+        <% messages.forEach((m) => { %>
+          <p><%= m %></p>
+        <% }); %>
+      </div>
+
+      <form id="message-form" action="/">
+        <div class="form-group">
+          <label for="content">Message</label>
+          <input type="text" class="form-control" name="content" placeholder="">
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </form>
+
+
 
     </div>
 
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"  crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+      $('#message-form').submit(function(){
+
+          // Maybe show a loading indicator...
+
+          $.post($(this).attr('action'), $(this).serialize(), function(res){
+              // Do something with the response `res`
+              // console.log(res);
+              // Don't forget to hide the loading indicator!
+          });
+
+          $(this).find('[name=content]').val('');
+
+          return false; // prevent default action
+
+      });
+
+      var evtSource = new EventSource("/events");
+
+      evtSource.onmessage = function(e) {
+        $('#messages').append('<p>' + JSON.parse(e.data) + '</p>')
+      }
+
+    </script>
   </body>
 </html>

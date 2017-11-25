@@ -20,7 +20,8 @@ router.get('/events', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  messages.push(req.params.content);
+  console.log(req.body.content);
+  messages.push(req.body.content);
   res.end();
 
   notify();
