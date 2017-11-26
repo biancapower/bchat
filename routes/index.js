@@ -23,7 +23,7 @@ router.get('/events', (req, res) => {
 });
 
 // handles incoming messages
-router.post('/', (req, res) => {
+router.post('/chat', (req, res) => {
   console.log(req.body.content);
 
   // appends new message to list of messages

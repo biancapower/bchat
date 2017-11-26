@@ -17,6 +17,7 @@ var Connection = (function () {
     }
     Connection.prototype.setup = function () {
         this.res.writeHead(200, {
+            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'text/event-stream',
             'Cache-Control': 'no-cache',
             'Connection': 'keep-alive'
